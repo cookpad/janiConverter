@@ -20,7 +20,7 @@ RUN locale-gen en_GB.UTF-8
 RUN dpkg-reconfigure locales
 
 RUN apt-get update
-RUN apt-get install -y build-essential wget curl git
+RUN apt-get install -y build-essential wget curl git git-core
 
 # ffmpeg
 ## Enable Universe and Multiverse and install dependencies.
@@ -50,6 +50,41 @@ RUN cd /usr/local/src/ffmpeg; ./configure --extra-libs="-ldl" --enable-gpl --ena
 # imagemagick
 RUN apt-get install -y imagemagick
 
+# Node.js & npm
+RUN \
+  apt-get install -y software-properties-common && \
+  apt-get update && \
+  add-apt-repository -y ppa:chris-lea/node.js && \
+  apt-get update && \
+  apt-get install -y nodejs
+
+# ruby
+RUN apt-get -y install \
+    libcurl4-openssl-dev \
+    libreadline-dev \
+    libssl-dev \
+    libxml2-dev \
+    libxslt1-dev \
+    libyaml-dev \
+    zlib1g-dev && \
+    curl -O http://cache.ruby-lang.org/pub/ruby/2.1/ruby-2.1.3.tar.gz && \
+    tar -zxvf ruby-2.1.3.tar.gz && \
+    cd ruby-2.1.3 && \
+    ./configure --disable-install-doc && \
+    make && \
+    make install && \
+    cd .. && \
+    rm -r ruby-2.1.3 ruby-2.1.3.tar.gz && \
+    echo 'gem: --no-document' > /usr/local/etc/gemrc
+
+RUN echo 'gem: --no-rdoc --no-ri' >> /.gemrc
+RUN gem update --system
+RUN gem update
+RUN gem install bundler
+RUN apt-get -y install libmagickcore-dev libmagickwand-dev
+RUN gem install rmagick
+RUN gem install streamio-ffmpeg
+
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-hash -r
+RUN hash -r
