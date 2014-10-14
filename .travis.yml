@@ -1,0 +1,11 @@
+before_install:
+  - sudo apt-get -y update
+  - sudo apt-get -y install libavformat-dev
+  - sudo apt-get -y install ffmpeg
+language: ruby
+rvm:
+  - 2.1.3
+
+addons:
+   code_climate:
+     repo_token: 1f90976d66c1c1cb114e5396479faf3be15c6656460bb6a87cd681a33fde210b
