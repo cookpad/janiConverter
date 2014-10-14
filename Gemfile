@@ -2,7 +2,6 @@ source "https://rubygems.org"
 
 # rails things(mostly by rails new)
 gem "rails",            github: "rails/rails", branch: "4-1-stable"
-gem "mysql2"
 gem "sprockets-rails",  github: "rails/sprockets-rails", branch: "2-1-stable"
 gem "sass-rails",       github: "rails/sass-rails"
 gem "uglifier", ">= 1.3.0"
@@ -10,6 +9,15 @@ gem "coffee-rails",     github: "rails/coffee-rails"
 gem "jquery-rails"
 gem "therubyracer", platforms: :ruby
 gem "bcrypt", "~> 3.1.7"
+
+# database
+if ENV["DB"] == "sqlite"
+  gem "sqlite3"
+elsif ENV["DB"] == "postgresql"
+  gem "pg"
+else
+  gem "mysql2"
+end
 
 # web server
 gem "puma"
@@ -53,7 +61,9 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'pry-doc'
-  gem 'pry-stack_explorer'
   gem 'awesome_print'
   gem 'activerecord-import'
+  gem 'guard-rspec'
+  gem "spring-commands-rspec"
+  gem "codeclimate-test-reporter", require: nil
 end
