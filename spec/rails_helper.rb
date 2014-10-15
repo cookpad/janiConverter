@@ -6,6 +6,14 @@ require 'rspec/rails'
 require "factory_girl"
 require "codeclimate-test-reporter"
 
+if ENV["CI"]
+  WebMock.disable_net_connect!(:allow => "codeclimate.com")
+  VCR.configure do |config|
+    config.ignore_hosts 'codeclimate.com'
+  end
+  CodeClimate::TestReporter.start
+end
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -55,12 +63,4 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
-end
-
-if ENV["CI"]
-  WebMock.disable_net_connect!(:allow => "codeclimate.com")
-  VCR.configure do |config|
-    config.ignore_hosts 'codeclimate.com'
-  end
-  CodeClimate::TestReporter.start
 end
