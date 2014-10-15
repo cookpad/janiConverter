@@ -29,6 +29,11 @@ gem "jani-strip_maker"
 gem "carrierwave"
 gem "fog", require: "fog/aws/storage"
 
+# queue
+gem 'sidekiq'
+gem 'sinatra', require: false
+gem 'slim'
+
 group :development do
   gem "spring"
   gem "factory_girl_rails"
