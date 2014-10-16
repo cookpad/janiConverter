@@ -291,6 +291,7 @@ GEM
     rspec-support (3.1.2)
     safe_yaml (1.0.4)
     sass (3.4.5)
+    settingslogic (2.0.9)
     sidekiq (3.2.4)
       celluloid (>= 0.15.2)
       connection_pool (>= 2.0.0)
@@ -380,6 +381,7 @@ DEPENDENCIES
   rspec-rails
   rspec-support
   sass-rails!
+  settingslogic
   sidekiq
   simplecov
   sinatra

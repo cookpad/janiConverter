@@ -19,6 +19,9 @@ else
   gem "mysql2"
 end
 
+# settings
+gem "settingslogic"
+
 # web server
 gem "puma"
 
