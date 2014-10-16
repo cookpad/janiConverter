@@ -44,6 +44,9 @@ group :development do
   gem "quiet_assets"
   gem "better_errors", github: "charliesome/better_errors"
   gem "binding_of_caller", github: "banister/binding_of_caller"
+  gem "guard-rspec"
+  gem "guard-livereload", require: false
+  gem "rack-livereload"
 end
 
 group :test do
@@ -72,7 +75,6 @@ group :development, :test do
   gem 'pry-doc'
   gem 'awesome_print'
   gem 'activerecord-import'
-  gem 'guard-rspec'
   gem "spring-commands-rspec"
   gem "codeclimate-test-reporter", require: nil
 end
