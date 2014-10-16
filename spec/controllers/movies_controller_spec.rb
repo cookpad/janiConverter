@@ -1,6 +1,9 @@
 require 'rails_helper'
+require 'sidekiq/testing'
 
 describe MoviesController, type: :controller do
+  before { Sidekiq::Testing.fake! }
+  after { Sidekiq::Worker.clear_all }
   describe "#create" do
     subject { post :create, movie: movie_params }
 

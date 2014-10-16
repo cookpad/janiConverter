@@ -3,6 +3,7 @@ class MoviesController < ApplicationController
 
   def create
     @movie = Movie.create(movie_params(params))
+    Converter.perform_async(@movie.uuid)
     redirect_to @movie
   end
 
