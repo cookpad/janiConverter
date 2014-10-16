@@ -31,6 +31,7 @@ gem "jani-strip_maker"
 # file uploader
 gem "carrierwave"
 gem "fog", require: "fog/aws/storage"
+gem 'carrierwave_backgrounder'
 
 # queue
 gem 'sidekiq'

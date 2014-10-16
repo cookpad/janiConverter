@@ -2,8 +2,10 @@ require "jani/strip_maker/movie"
 require "jani/strip_maker/transcode_options"
 
 class Movie < ActiveRecord::Base
-  mount_uploader :movie, MovieUploader
   validates_presence_of :uuid, :frame_width, :frame_height, :fps
+
+  mount_uploader :movie, MovieUploader
+  process_in_background :movie
 
   def to_strips
     to_strip_maker_movie.to_strips
