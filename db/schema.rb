@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141016161420) do
+ActiveRecord::Schema.define(version: 20141016182927) do
 
   create_table "movies", force: true do |t|
     t.string   "uuid"
@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 20141016161420) do
     t.boolean  "movie_processing", default: false, null: false
     t.string   "movie_tmp"
   end
+
+  add_index "movies", ["uuid"], name: "index_movies_on_uuid", unique: true, using: :btree
 
   create_table "strips", force: true do |t|
     t.integer  "movie_id"
