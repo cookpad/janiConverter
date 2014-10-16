@@ -19,6 +19,9 @@ else
   gem "mysql2"
 end
 
+# settings
+gem "settingslogic"
+
 # web server
 gem "puma"
 
@@ -28,6 +31,11 @@ gem "jani-strip_maker"
 # file uploader
 gem "carrierwave"
 gem "fog", require: "fog/aws/storage"
+
+# queue
+gem 'sidekiq'
+gem 'sinatra', require: false
+gem 'slim'
 
 group :development do
   gem "spring"
