@@ -8,6 +8,7 @@ class Converter
       Dir.chdir(tmp_dir) do |dir|
         movie.to_strips.map(&:write)
         uploader = StripUploader.new
+        uploader.movie_uuid = uuid
         Dir.glob("*").each { |file| uploader.store!(File.open(file)) }
       end
     end
