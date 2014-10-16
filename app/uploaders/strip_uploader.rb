@@ -1,5 +1,5 @@
 class StripUploader < CarrierWave::Uploader::Base
-  attr_accessor :movie_uuid
+  include ::CarrierWave::Backgrounder::Delay
 
   # see https://github.com/carrierwaveuploader/carrierwave/wiki/How-to:-Define-different-storage-configuration-for-each-Uploader.
   def initialize(*)
@@ -8,6 +8,6 @@ class StripUploader < CarrierWave::Uploader::Base
   end
 
   def store_dir
-    "#{Rails.env}/strips/#{movie_uuid}"
+    "#{Rails.env}/strips/#{model.movie.uuid}"
   end
 end

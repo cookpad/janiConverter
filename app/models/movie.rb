@@ -2,6 +2,7 @@ require "jani/strip_maker/movie"
 require "jani/strip_maker/transcode_options"
 
 class Movie < ActiveRecord::Base
+  has_many :strips
   validates_presence_of :uuid, :frame_width, :frame_height, :fps
   validates_uniqueness_of :uuid
 
@@ -9,7 +10,9 @@ class Movie < ActiveRecord::Base
   process_in_background :movie
 
   def to_strips
-    to_strip_maker_movie.to_strips
+    to_strip_maker_movie.to_strips.map do |strip|
+      Strip.new_from_strip_maker_strip(strip_maker_strip: strip, movie: self)
+    end
   end
 
   private

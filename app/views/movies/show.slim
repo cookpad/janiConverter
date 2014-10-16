@@ -5,3 +5,12 @@ ul
   li= @movie.frame_height
   li= @movie.fps
   li= @movie.uuid
+  li= @movie.strips.count
+
+ul
+  - @movie.strips.order(:index).each do |strip|
+    li
+      ul
+        li=strip.image.url
+        li=strip.frames_count
+        li=strip.index

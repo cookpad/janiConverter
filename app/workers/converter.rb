@@ -4,13 +4,6 @@ class Converter
   def perform(uuid)
     movie = Movie.where(uuid: uuid).first()
     return unless movie
-    Dir.mktmpdir do |tmp_dir|
-      Dir.chdir(tmp_dir) do |dir|
-        movie.to_strips.map(&:write)
-        uploader = StripUploader.new
-        uploader.movie_uuid = uuid
-        Dir.glob("*").each { |file| uploader.store!(File.open(file)) }
-      end
-    end
+    movie.to_strips.each(&:save)
   end
 end
