@@ -1,6 +1,10 @@
 class MoviesController < ApplicationController
   respond_to :json, :html
 
+  def new
+    @movie = Movie.new(uuid: SecureRandom.uuid)
+  end
+
   def create
     @movie = Movie.create(movie_params(params))
     Converter.perform_async(@movie.uuid)
@@ -15,6 +19,6 @@ class MoviesController < ApplicationController
   private
 
   def movie_params(params)
-    params.require(:movie).permit(:uuid, :fps, :frame_height, :frame_width)
+    params.require(:movie).permit(:uuid, :fps, :frame_height, :frame_width, :movie)
   end
 end

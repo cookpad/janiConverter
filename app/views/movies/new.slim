@@ -1,0 +1,13 @@
+h1 new movie
+
+p creating a movie with uuid: #{@movie.uuid}
+
+= form_for @movie, html: { multipart: true } do |movie_form|
+  = movie_form.text_field :frame_width, placeholder: :width
+  = movie_form.text_field :frame_height, placeholder: :height
+  = movie_form.text_field :fps, placeholder: :FPS
+  = movie_form.file_field :movie
+  = movie_form.hidden_field :uuid
+  -# see https://github.com/carrierwaveuploader/carrierwave#making-uploads-work-across-form-redisplays
+  = movie_form.hidden_field :movie_cache
+  = movie_form.submit
