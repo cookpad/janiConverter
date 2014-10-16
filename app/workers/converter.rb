@@ -6,9 +6,7 @@ class Converter
       Dir.chdir(tmp_dir) do |dir|
         Movie.where(uuid: uuid).first().to_strips.map(&:write)
         uploader = StripUploader.new
-        Dir.glob("*").each do |file|
-          uploader.store!(File.open(file))
-        end
+        Dir.glob("*").each { |file| uploader.store!(File.open(file)) }
       end
     end
   end
