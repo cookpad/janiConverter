@@ -24,7 +24,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: 73787a973302c06fbfff82253e6c1607432d1dbc
+  revision: 861dbf4645a1e1df54cb40193940cdcc441d9adb
   branch: 4-1-stable
   specs:
     actionmailer (4.1.6)
@@ -233,7 +233,7 @@ GEM
     mail (2.6.1)
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
-    mime-types (2.4.1)
+    mime-types (2.4.2)
     mini_portile (0.6.0)
     minitest (5.4.2)
     multi_json (1.10.1)
