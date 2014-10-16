@@ -1,4 +1,6 @@
 class MovieUploader < CarrierWave::Uploader::Base
+  include ::CarrierWave::Backgrounder::Delay
+
   # see https://github.com/carrierwaveuploader/carrierwave/wiki/How-to:-Define-different-storage-configuration-for-each-Uploader.
   def initialize(*)
     super

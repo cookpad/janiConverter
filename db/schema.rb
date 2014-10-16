@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141015053836) do
+ActiveRecord::Schema.define(version: 20141016085719) do
 
   create_table "movies", force: true do |t|
     t.string   "uuid"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 20141015053836) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "movie"
+    t.boolean  "movie_processing", default: false, null: false
+    t.string   "movie_tmp"
   end
 
 end
