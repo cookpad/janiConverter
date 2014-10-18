@@ -16,7 +16,7 @@ describe MoviesController, type: :controller do
 
     it "sets attributes: uuid, fps, frame_height, frame_width" do
       subject
-      expect(assigns(:movie).uuid).to eq(new_movie.uuid)
+      expect(assigns(:movie).uuid).not_to eq(new_movie.uuid)
       expect(assigns(:movie).fps).to eq(new_movie.fps)
       expect(assigns(:movie).frame_height).to eq(new_movie.frame_height)
       expect(assigns(:movie).frame_width).to eq(new_movie.frame_width)
@@ -35,7 +35,7 @@ describe MoviesController, type: :controller do
 
     it "shows the movie" do
       subject
-      expect(assigns(:movie).id).to eq(movie.id)
+      expect(assigns(:movie).uuid).to eq(movie.uuid)
     end
   end
 end
