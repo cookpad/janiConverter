@@ -1,0 +1,13 @@
+.stages_container data-loading-stage="loading_scene" data-finished-stage="finished_scene" data-content-stage="content_scene" data-movie-stage="playing_scene"
+  .movie_control.loading.hide.loading_scene
+    p play movie
+  .movie_control.finished.hide.finished_scene
+    p replay movie
+  .playing_scene data-screen="movie" data-strips-container="movie_strips" data-strips="strip" data-defaule-image="http://placehold.it/320x180"
+    .movie.hide data-frame-width=320 data-frame-height=180 data-fps=15
+      .movie_strips
+        - movie.strips.order(:index).each do |strip|
+          .strip.hide data-url="#{strip.image.url}" data-frames-count="#{strip.frames_count}"
+            img
+  .content_scene.hide
+    img src="http://placehold.it/320x180"
