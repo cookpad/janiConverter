@@ -1,0 +1,32 @@
+defaults: &defaults
+  provider: AWS
+  region: ap-northeast-1
+  path_style: true
+  public: false
+  max_age: <%= 365.day.to_i %>
+  access_key_id: <%= Rails.application.secrets.aws_access_key_id %>
+  secret_access_key: <%= Rails.application.secrets.aws_secret_access_key %>
+
+upload_defaults: &upload_defaults
+  <<: *defaults
+  directory: 'misc.ap-northeast-1/movie-ad-transcoder/uploads'
+
+publish_defaults: &publish_defaults
+  <<: *defaults
+  directory: 'ad.ap-northeast-1/movie-ad-creatives'
+
+development:
+  upload:
+    <<: *upload_defaults
+  publish:
+    <<: *publish_defaults
+
+production:
+  upload:
+    <<: *upload_defaults
+  publish:
+    <<: *publish_defaults
+
+test:
+  upload:
+  publish:
