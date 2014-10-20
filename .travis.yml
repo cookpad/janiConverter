@@ -26,4 +26,4 @@ addons:
      repo_token: 1f90976d66c1c1cb114e5396479faf3be15c6656460bb6a87cd681a33fde210b
 matrix:
   allow_failures:
-    - ruby-head
+    - rvm: ruby-head
