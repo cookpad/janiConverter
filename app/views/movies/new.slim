@@ -1,7 +1,5 @@
 h1 new movie
 
-p creating a movie with uuid: #{@movie.uuid}
-
 = form_for @movie, html: { multipart: true } do |movie_form|
   = movie_form.text_field :frame_width, placeholder: :width
   = movie_form.text_field :frame_height, placeholder: :height
