@@ -1,0 +1,13 @@
+---
+:concurrency: 5
+:pidfile: tmp/pids/sidekiq.pid
+development:
+  :concurrency: 25
+staging:
+  :concurrency: 25
+production:
+  :concurrency: 25
+:queues:
+  - default
+  - [transcoder, 1]
+  - [movie_upload, 1]
