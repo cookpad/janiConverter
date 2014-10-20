@@ -1,5 +1,5 @@
 class StorageSettings < Settingslogic
-  source "#{Rails.root}/config/strages.yml"
+  source "#{Rails.root}/config/storages.yml"
   namespace Rails.env
 
   def self.set_to_uploader(uploader, storage)
