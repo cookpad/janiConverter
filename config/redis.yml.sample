@@ -11,10 +11,10 @@ development:
 production:
   server:
     <<: *defaults
-    url: <%= ENV['REDIS_URL'] %>
+    url: <%= ENV['REDIS_URL'] || "redis://localhost:6379" %>
   client:
     <<: *defaults
-    url: <%= ENV['REDIS_URL'] %>
+    url: <%= ENV['REDIS_URL'] || "redis://localhost:6379"%>
 
 test:
   server:
