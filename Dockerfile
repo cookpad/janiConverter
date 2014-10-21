@@ -5,6 +5,8 @@ MAINTAINER Shinichi Ohno
 # Set correct environment variables.
 # ENV HOME /root
 ENV DEBIAN_FRONTEND noninteractive
+ENV PORT 8080
+ENV RAILS_ENV production
 
 # Regenerate SSH host keys. baseimage-docker does not contain any, so you
 # have to do that yourself. You may also comment out this instruction; the
@@ -71,7 +73,7 @@ RUN apt-get -y install \
     tar -zxvf ruby-2.1.3.tar.gz && \
     cd ruby-2.1.3 && \
     ./configure --disable-install-doc && \
-    make && \
+    make -j 4 && \
     make install && \
     cd .. && \
     rm -r ruby-2.1.3 ruby-2.1.3.tar.gz && \
@@ -87,30 +89,29 @@ RUN echo 'gem: --no-rdoc --no-ri' >> /.gemrc
 RUN gem update --system
 RUN gem update
 RUN gem install bundler
+RUN gem install jani-strip_maker
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN hash -r
 
-# Setup Rails app
-RUN mkdir /jani-converter
-WORKDIR /jani-converter
+## setup rails
+RUN mkdir /etc/service/puma
+ADD docker/puma.sh /etc/service/puma/run
+RUN chmod +x /etc/service/puma/run
 
 ## bundle install first to Cache gems
-ADD Gemfile Gemfile
-ADD Gemfile.lock Gemfile.lock
-RUN bundle config without test development doc
-RUN bundle install
+WORKDIR /tmp
+ADD Gemfile /tmp/Gemfile
+ADD Gemfile.lock /tmp/Gemfile.lock
+RUN bundle install --without="development test" -j 4
 
-## copy app files
-ADD . /jani-converter
-
+ADD . /app
+WORKDIR /app
 RUN cp config/redis.yml.sample config/redis.yml
 RUN cp config/secrets.yml.sample config/secrets.yml
 RUN cp config/storages.yml.sample config/storages.yml
-
-## setup rails
-ENV RAILS_ENV production
-EXPOSE 3000
-
-CMD bundle exec rake db:create db:migrate assets:precompile && bundle exec rails server
+RUN mkdir -p tmp/pids
+# To create .bundle directory, run `bundle install`
+RUN bundle install --without="development test" -j 4
+RUN bundle exec rake assets:precompile
