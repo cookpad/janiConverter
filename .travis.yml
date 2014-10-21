@@ -8,6 +8,7 @@ before_install:
   - if [[ $DB == 'sqlite' ]]; then rm Gemfile.lock; fi
   - if [[ $DB == 'postgresql' ]]; then rm Gemfile.lock; fi
 before_script:
+  - cp config/redis.yml.sample config/redis.yml
   - bundle exec rake db:create
   - bundle exec rake db:migrate
 language: ruby
