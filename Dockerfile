@@ -58,7 +58,7 @@ RUN \
   apt-get update && \
   apt-get install -y nodejs
 
-# ruby
+# ruby & gem dependencies
 RUN apt-get -y install \
     libcurl4-openssl-dev \
     libreadline-dev \
@@ -77,13 +77,40 @@ RUN apt-get -y install \
     rm -r ruby-2.1.3 ruby-2.1.3.tar.gz && \
     echo 'gem: --no-document' > /usr/local/etc/gemrc
 
+# dependencies to install mysql2 gem
+RUN apt-get -y install libmysqlclient-dev
+
+# dependencies to install rmagick gem
+RUN apt-get -y install libmagickcore-dev libmagickwand-dev
+
 RUN echo 'gem: --no-rdoc --no-ri' >> /.gemrc
 RUN gem update --system
 RUN gem update
 RUN gem install bundler
-RUN apt-get -y install libmagickcore-dev libmagickwand-dev
-RUN gem install jani-strip_maker
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN hash -r
+
+# Setup Rails app
+RUN mkdir /jani-converter
+WORKDIR /jani-converter
+
+## bundle install first to Cache gems
+ADD Gemfile Gemfile
+ADD Gemfile.lock Gemfile.lock
+RUN bundle config without test development doc
+RUN bundle install
+
+## copy app files
+ADD . /jani-converter
+
+## setup rails
+ENV RAILS_ENV development
+RUN bundle exec rake db:create
+RUN bundle exec rake db:migrate
+RUN bundle exec rake assets:precompile
+
+EXPOSE 3000
+
+CMD bundle exec rails server

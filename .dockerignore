@@ -1,0 +1,7 @@
+public/assets/*
+public/test
+public/uploads
+
+.bundle
+vendor/bundle
+log
