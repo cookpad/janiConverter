@@ -24,8 +24,10 @@ development:
 production:
   upload:
     <<: *upload_defaults
+    directory: <%= ENV['AWS_UPLOAD_DIRECTORY'] %>
   publish:
     <<: *publish_defaults
+    directory: <%= ENV['AWS_PUBLISH_DIRECTORY'] %>
 
 test:
   upload:

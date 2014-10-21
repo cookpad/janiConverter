@@ -105,12 +105,12 @@ RUN bundle install
 ## copy app files
 ADD . /jani-converter
 
-## setup rails
-ENV RAILS_ENV development
-RUN bundle exec rake db:create
-RUN bundle exec rake db:migrate
-RUN bundle exec rake assets:precompile
+RUN cp config/redis.yml.sample config/redis.yml
+RUN cp config/secrets.yml.sample config/secrets.yml
+RUN cp config/storages.yml.sample config/storages.yml
 
+## setup rails
+ENV RAILS_ENV production
 EXPOSE 3000
 
-CMD bundle exec rails server
+CMD bundle exec rake db:create db:migrate assets:precompile && bundle exec rails server

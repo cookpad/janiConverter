@@ -53,6 +53,8 @@ test:
 production:
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
-  database: jani-converter
-  username: <%= ENV['JANI-CONVERTER_DATABASE_USERNAME'] %>
-  password: <%= ENV['JANI-CONVERTER_DATABASE_PASSWORD'] %>
+  database: <%= ENV['DATABASE_NAME'] || "jani-converter" %>
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  socket: <%= ENV['DATABASE_SOCKET'] %>
+  host: <%= ENV['DATABASE_HOST'] %>
