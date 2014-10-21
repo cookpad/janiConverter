@@ -54,3 +54,4 @@ public/uploads/
 public/test/
 config/strages.yml
 config/storages.yml
+config/redis.yml

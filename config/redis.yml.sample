@@ -1,0 +1,23 @@
+defaults: &defaults
+  url: "redis://localhost:6379"
+  namespace: "janiconverter"
+
+development:
+  server:
+    <<: *defaults
+  client:
+    <<: *defaults
+
+production:
+  server:
+    <<: *defaults
+    url: <%= ENV['REDIS_URL'] %>
+  client:
+    <<: *defaults
+    url: <%= ENV['REDIS_URL'] %>
+
+test:
+  server:
+    <<: *defaults
+  client:
+    <<: *defaults
