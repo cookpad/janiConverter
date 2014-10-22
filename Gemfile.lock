@@ -16,7 +16,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/coffee-rails.git
-  revision: bb0e3e8af13cae94cadf1bda358f8137714bd45b
+  revision: 70de1214b3155890e4cf29b1884eef0ea40894cf
   specs:
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -24,7 +24,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: 861dbf4645a1e1df54cb40193940cdcc441d9adb
+  revision: fb3cf86f7ca060e5a606c09aaa1656d13fc2070a
   branch: 4-1-stable
   specs:
     actionmailer (4.1.6)
@@ -169,7 +169,7 @@ GEM
       fog-softlayer
       ipaddress (~> 0.5)
       nokogiri (~> 1.5, >= 1.5.11)
-    fog-brightbox (0.5.1)
+    fog-brightbox (0.6.0)
       fog-core (~> 1.22)
       fog-json
       inflecto
@@ -189,7 +189,7 @@ GEM
     fog-sakuracloud (0.1.1)
       fog-core
       fog-json
-    fog-softlayer (0.3.20)
+    fog-softlayer (0.3.21)
       fog-core
       fog-json
     fog-xml (0.1.0)
@@ -233,7 +233,7 @@ GEM
     mail (2.6.1)
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
-    mime-types (2.4.2)
+    mime-types (2.4.3)
     mini_portile (0.6.0)
     minitest (5.4.2)
     multi_json (1.10.1)
