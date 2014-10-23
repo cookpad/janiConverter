@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141016182927) do
+ActiveRecord::Schema.define(version: 20141023032609) do
 
   create_table "movies", force: true do |t|
     t.string   "uuid"
@@ -37,5 +37,16 @@ ActiveRecord::Schema.define(version: 20141016182927) do
   end
 
   add_index "strips", ["movie_id", "index"], name: "index_strips_on_movie_id_and_index", using: :btree
+
+  create_table "tracking_events", force: true do |t|
+    t.string   "label"
+    t.text     "url"
+    t.integer  "track_on"
+    t.integer  "movie_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tracking_events", ["movie_id", "label"], name: "index_tracking_events_on_movie_id_and_label", unique: true, using: :btree
 
 end

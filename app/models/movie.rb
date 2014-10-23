@@ -3,6 +3,7 @@ require "jani/strip_maker/transcode_options"
 
 class Movie < ActiveRecord::Base
   has_many :strips
+  has_many :tracking_events
   validates_presence_of :uuid, :frame_width, :frame_height, :fps
   validates_uniqueness_of :uuid
 
@@ -13,6 +14,11 @@ class Movie < ActiveRecord::Base
     to_strip_maker_movie.to_strips.map do |strip|
       Strip.new_from_strip_maker_strip(strip_maker_strip: strip, movie: self)
     end
+  end
+
+  def tracking_event_for_label(label)
+    return nil unless label
+    tracking_events.for_label(label)
   end
 
   private

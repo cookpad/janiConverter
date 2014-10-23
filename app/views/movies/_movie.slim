@@ -11,3 +11,6 @@
             img
   .content_scene.hide
     img src="http://placehold.it/320x180"
+  .tracking_events style="width: 0;height: 0;display: none;"
+    - movie.tracking_events.each do |tracking_event|
+      .tracking data-event=tracking_event.label data-url=tracking_event.url data-track-on=tracking_event.track_on
