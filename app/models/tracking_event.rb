@@ -9,7 +9,7 @@ class TrackingEvent < ActiveRecord::Base
     # These labels are tracking events of vast 2.0 standards
     # you dont have to support all of them
     # see  http://www.iab.net/media/file/VAST-2_0-FINAL.pdf
-    # in Japanse, this link would be helpful
+    # if you prefer to read in Japanse, this link would be helpful
     # http://support.brightcove.com/ja/video-cloud/サポートドキュメント/vast-20-xml-コードの構成要素
     CREATIVE_VIEW = "creative_view"
     START = "start"
