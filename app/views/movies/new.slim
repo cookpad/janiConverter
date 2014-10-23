@@ -1,11 +1,24 @@
 h1 new movie
 
 = form_for @movie, html: { multipart: true } do |movie_form|
+
+  h2 movie file
+  = movie_form.file_field :movie
+  -# see https://github.com/carrierwaveuploader/carrierwave#making-uploads-work-across-form-redisplays
+  = movie_form.hidden_field :movie_cache
+
+  h2 movie attributes
   = movie_form.text_field :frame_width, placeholder: :width
   = movie_form.text_field :frame_height, placeholder: :height
   = movie_form.text_field :fps, placeholder: :FPS
-  = movie_form.file_field :movie
-  = movie_form.hidden_field :uuid
-  -# see https://github.com/carrierwaveuploader/carrierwave#making-uploads-work-across-form-redisplays
-  = movie_form.hidden_field :movie_cache
+
+  h2 callback urls
+  dl
+    = movie_form.fields_for :tracking_events do |tracking_events_field|
+      - TrackingEvent::Labels.constants.map { |const| TrackingEvent::Labels.const_get(const) }.each do |label|
+        = tracking_events_field.fields_for label do |tracking_event_field|
+          = tracking_event_field.hidden_field :label, value: label
+          dl= label.humanize(capitalize: false)
+          dd= tracking_event_field.text_field :url, placeholder: :url
+
   = movie_form.submit
