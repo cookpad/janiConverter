@@ -26,6 +26,28 @@ describe MoviesController, type: :controller do
       subject
       expect(assigns(:movie).movie).to be_a_kind_of(MovieUploader)
     end
+
+    describe "tracking events attributes" do
+      let(:movie_params) do
+        new_movie.attributes.merge(
+          "tracking_events" => {
+            "creative_view" => {"label"=>"creative_view", "url"=>"/track?event=creative_view"},
+            "start"=>{"label"=>"start", "url"=>"/track?event=start"},
+            "first_quartile"=>{"label"=>"first_quartile", "url"=>""},
+            "mid_point"=>{"label"=>"mid_point", "url"=>""},
+          }
+        )
+      end
+
+      it "creates tracking events" do
+        subject
+        expect(assigns(:movie).tracking_events.count).to eq 2
+        expect(assigns(:movie).tracking_events.first.label).to eq "creative_view"
+        expect(assigns(:movie).tracking_events.first.url).to eq "/track?event=creative_view"
+        expect(assigns(:movie).tracking_events.second.label).to eq "start"
+        expect(assigns(:movie).tracking_events.second.url).to eq "/track?event=start"
+      end
+    end
   end
 
   describe "#show" do
