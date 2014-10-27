@@ -4,8 +4,11 @@ require "jani/strip_maker/transcode_options"
 class Movie < ActiveRecord::Base
   has_many :strips
   has_many :tracking_events
+  has_one :loading_banner
+  has_one :postroll_banner
   validates_presence_of :uuid, :frame_width, :frame_height, :fps
   validates_uniqueness_of :uuid
+  accepts_nested_attributes_for :loading_banner, :postroll_banner
 
   mount_uploader :movie, MovieUploader
   process_in_background :movie
