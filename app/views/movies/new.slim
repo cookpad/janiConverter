@@ -21,4 +21,15 @@ h1 new movie
           dl= label.humanize(capitalize: false)
           dd= tracking_event_field.text_field :url, placeholder: :url
 
+  h2 loading banner
+  = movie_form.fields_for :loading_banner do |loading_banner_fields|
+    = loading_banner_fields.file_field :image
+
+  h2 postroll banner
+  = movie_form.fields_for :postroll_banner do |postroll_banner_fields|
+    = postroll_banner_fields.text_field :url, placeholder: :url
+    = postroll_banner_fields.file_field :image
+
+  hr
+
   = movie_form.submit

@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141023032609) do
+ActiveRecord::Schema.define(version: 20141027023515) do
+
+  create_table "loading_banners", force: true do |t|
+    t.string   "image"
+    t.integer  "movie_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "loading_banners", ["movie_id"], name: "index_loading_banners_on_movie_id", unique: true, using: :btree
 
   create_table "movies", force: true do |t|
     t.string   "uuid"
@@ -26,6 +35,16 @@ ActiveRecord::Schema.define(version: 20141023032609) do
   end
 
   add_index "movies", ["uuid"], name: "index_movies_on_uuid", unique: true, using: :btree
+
+  create_table "postroll_banners", force: true do |t|
+    t.text     "url"
+    t.string   "image"
+    t.integer  "movie_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "postroll_banners", ["movie_id"], name: "index_postroll_banners_on_movie_id", unique: true, using: :btree
 
   create_table "strips", force: true do |t|
     t.integer  "movie_id"

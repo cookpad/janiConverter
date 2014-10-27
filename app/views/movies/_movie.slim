@@ -3,14 +3,19 @@
     p play movie
   .movie_control.finished.hide.finished_scene
     p replay movie
-  .playing_scene data-screen="movie" data-strips-container="movie_strips" data-strips="strip" data-defaule-image="http://placehold.it/320x180"
+  .playing_scene data-screen="movie" data-strips-container="movie_strips" data-strips="strip" data-default-image="#{movie.loading_banner.try(:image).try(:url)}"
     .movie.hide data-frame-width=320 data-frame-height=180 data-fps=15
       .movie_strips
         - movie.strips.order(:index).each do |strip|
           .strip.hide data-url="#{strip.image.url}" data-frames-count="#{strip.frames_count}"
             img
   .content_scene.hide
-    img src="http://placehold.it/320x180"
+    - if movie.postroll_banner
+      - if movie.postroll_banner.url
+        a href=movie.postroll_banner.url
+          img src=movie.postroll_banner.image.url
+      - else
+        movie.postroll_banner
   .tracking_events style="width: 0;height: 0;display: none;"
     - movie.tracking_events.each do |tracking_event|
       .tracking data-event=tracking_event.label data-url=tracking_event.url data-track-on=tracking_event.track_on
