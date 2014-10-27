@@ -5,6 +5,6 @@ h2 preview
 =render partial: "movie", locals: { movie: @movie }
 =render partial: "player_assets"
 h2 HTML code
-p= raw(CGI::escapeHTML(render partial: "movie", locals: { movie: @movie }))
+p= raw(CGI::escapeHTML(@movie.to_html))
 h3 JavaScript code
-p=raw(CGI::escapeHTML(render partial: "player_assets", locals: { movie: @movie }))
+p= raw(CGI::escapeHTML(render partial: "player_assets"))

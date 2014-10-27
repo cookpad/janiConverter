@@ -4,7 +4,7 @@
   .movie_control.finished.hide.finished_scene
     p replay movie
   .playing_scene data-screen="movie" data-strips-container="movie_strips" data-strips="strip" data-default-image="#{movie.loading_banner.try(:image).try(:url)}"
-    .movie.hide data-frame-width=320 data-frame-height=180 data-fps=15
+    .movie.hide data-frame-width="#{movie.display_width}" data-frame-height="#{movie.display_height}" data-fps="#{movie.fps}"
       .movie_strips
         - movie.strips.order(:index).each do |strip|
           .strip.hide data-url="#{strip.image.url}" data-frames-count="#{strip.frames_count}"
