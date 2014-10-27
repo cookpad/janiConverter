@@ -28,6 +28,7 @@ production:
   publish:
     <<: *publish_defaults
     directory: <%= ENV['AWS_PUBLISH_DIRECTORY'] %>
+    asset_host: <%= ENV['PUBLISH_ASSET_HOST'] %>
 
 test:
   upload:
