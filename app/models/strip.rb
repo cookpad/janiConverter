@@ -2,7 +2,7 @@ class Strip < ActiveRecord::Base
   belongs_to :movie
   validates_presence_of :frames_count, :index, :movie, :image
 
-  mount_uploader :image, StripUploader
+  mount_uploader :image, ImagePublisher
   process_in_background :image
 
   def self.new_from_strip_maker_strip(strip_maker_strip: strip_maker_strip, movie: movie)

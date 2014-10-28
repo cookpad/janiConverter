@@ -14,6 +14,7 @@ class StorageSettings < Settingslogic
       }
       uploader.fog_directory  = publish_settings.directory
       uploader.fog_public     = publish_settings.public
+      uploader.asset_host     = publish_settings["asset_host"] # optional
       uploader.fog_attributes = {'Cache-Control'=>"max-age=#{publish_settings.max_age}"}
     end
   end
