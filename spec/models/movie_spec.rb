@@ -37,6 +37,7 @@ describe Movie, type: :model do
 
     it "renders dom for janiplayer" do
       expect(rendered.all(".stages_container")).to have(1).item
+      expect(rendered.find(".stages_container")["data-external-creative-id"]).to eq movie.external_creative_id
     end
 
     it "sets movie metadatas" do

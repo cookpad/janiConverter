@@ -1,10 +1,18 @@
 h1 video
+
 h2 uuid
 p= @movie.uuid
+
+- if @movie.external_creative_id
+  h2 external creative id
+  p= @movie.external_creative_id
+
 h2 preview
 =render partial: "movie", locals: { movie: @movie }
 =render partial: "player_assets"
+
 h2 HTML code
 p= raw(CGI::escapeHTML(@movie.to_html))
-h3 JavaScript code
+
+h2 JavaScript code
 p= raw(CGI::escapeHTML(render partial: "player_assets"))
