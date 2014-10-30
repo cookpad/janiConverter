@@ -5,6 +5,7 @@ FactoryGirl.define do
     frame_width { 160 * (rand(3) + 1) }
     frame_height { frame_width / 16 * 9 }
     fps { rand(10) + 10 }
+    external_creative_id { SecureRandom.uuid }
     movie { fixture_file_upload(Rails.root.join("spec", "fixtures", "movies", "kuro.mov")) }
   end
 end

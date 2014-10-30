@@ -18,7 +18,13 @@ class MoviesController < ApplicationController
   end
 
   def show
-    @movie = Movie.where(id: params[:id]).first()
+    @movie = if params[:id]
+      Movie.where(id: params[:id]).first()
+    elsif params[:external_creative_id]
+      Movie.where(external_creative_id: params[:external_creative_id]).first()
+    elsif params[:uuid]
+      Movie.where(uuid: params[:uuid]).first()
+    end
     respond_with @movie
   end
 
@@ -29,6 +35,7 @@ class MoviesController < ApplicationController
       :fps,
       :frame_height,
       :frame_width,
+      :external_creative_id,
       :movie,
       :movie_cache,
       postroll_banner_attributes: [:url, :image],

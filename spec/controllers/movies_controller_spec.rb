@@ -21,6 +21,7 @@ describe MoviesController, type: :controller do
       expect(assigns(:movie).fps).to eq(new_movie.fps)
       expect(assigns(:movie).frame_height).to eq(new_movie.frame_height)
       expect(assigns(:movie).frame_width).to eq(new_movie.frame_width)
+      expect(assigns(:movie).external_creative_id).to eq(new_movie.external_creative_id)
     end
 
     it "sets MovieUploader instance to Movie model instance" do
@@ -89,13 +90,31 @@ describe MoviesController, type: :controller do
   end
 
   describe "#show" do
-    subject { get :show, id: movie.id, format: :json }
+    subject { get :show, id: movie.id }
 
     let(:movie)  { create(:movie) }
 
     it "shows the movie" do
       subject
       expect(assigns(:movie).uuid).to eq(movie.uuid)
+    end
+
+    describe "with external creative id" do
+      subject { get :show, external_creative_id: movie.external_creative_id }
+
+      it "shows the movie" do
+        subject
+        expect(assigns(:movie).uuid).to eq(movie.uuid)
+      end
+    end
+
+    describe "with uuid" do
+      subject { get :show, uuid: movie.uuid }
+
+      it "shows the movie" do
+        subject
+        expect(assigns(:movie).uuid).to eq(movie.uuid)
+      end
     end
   end
 end
