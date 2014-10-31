@@ -33,7 +33,7 @@ describe MoviesController, type: :controller do
         new_movie.attributes.merge(
           "tracking_events" => {
             "creative_view" => {"label"=>"creative_view", "url"=>"/track?event=creative_view"},
-            "start"=>{"label"=>"start", "url"=>"/track?event=start"},
+            "start"=>{"label"=>"start", "url"=>"/track?event=start", "request_type"=>"xhr"},
             "first_quartile"=>{"label"=>"first_quartile", "url"=>""},
             "mid_point"=>{"label"=>"mid_point", "url"=>""},
           }
@@ -45,8 +45,10 @@ describe MoviesController, type: :controller do
         expect(assigns(:movie).tracking_events.count).to eq 2
         expect(assigns(:movie).tracking_events.first.label).to eq "creative_view"
         expect(assigns(:movie).tracking_events.first.url).to eq "/track?event=creative_view"
+        expect(assigns(:movie).tracking_events.first).to be_img
         expect(assigns(:movie).tracking_events.second.label).to eq "start"
         expect(assigns(:movie).tracking_events.second.url).to eq "/track?event=start"
+        expect(assigns(:movie).tracking_events.second).to be_xhr
       end
     end
 

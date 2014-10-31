@@ -5,6 +5,10 @@ class TrackingEvent < ActiveRecord::Base
 
   scope :for_label, -> (label) { where(label: label).first() }
 
+  enum request_type: %i(img xhr)
+
+  DEFAULT_REQUEST_TYPE = "img"
+
   module Labels
     # These labels are tracking events of vast 2.0 standards
     # you dont have to support all of them

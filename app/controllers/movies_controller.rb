@@ -44,6 +44,7 @@ class MoviesController < ApplicationController
       @movie.tracking_events.build.tap do |tracking_event|
         tracking_event.label = parameters["label"]
         tracking_event.url = parameters["url"]
+        tracking_event.request_type = parameters["request_type"] || TrackingEvent::DEFAULT_REQUEST_TYPE
         tracking_event.save
       end
     end

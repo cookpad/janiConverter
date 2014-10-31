@@ -18,4 +18,4 @@
         movie.postroll_banner
   .tracking_events style="width: 0;height: 0;display: none;"
     - movie.tracking_events.each do |tracking_event|
-      .tracking data-event=tracking_event.label data-url=tracking_event.url data-track-on=tracking_event.track_on
+      .tracking data-event=tracking_event.label data-url=tracking_event.url data-track-on=tracking_event.track_on data-type=tracking_event.request_type
