@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141027023515) do
+ActiveRecord::Schema.define(version: 20141031005252) do
 
   create_table "loading_banners", force: true do |t|
     t.string   "image"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 20141027023515) do
     t.integer  "movie_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "request_type", limit: 1, default: 0, null: false
   end
 
   add_index "tracking_events", ["movie_id", "label"], name: "index_tracking_events_on_movie_id_and_label", unique: true, using: :btree
