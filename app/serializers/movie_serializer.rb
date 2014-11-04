@@ -3,8 +3,6 @@ class MovieSerializer < ActiveModel::Serializer
   has_one :loading_banner, :postroll_banner
   has_many :tracking_events, :strips
 
-  self.root = false
-
   def pixel_ratio
     Movie::PIXEL_RATIO
   end
