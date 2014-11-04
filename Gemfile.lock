@@ -89,16 +89,6 @@ GIT
       activesupport (>= 3.0)
       sprockets (~> 2.8)
 
-GIT
-  remote: git://github.com/shin1ohno/autodoc.git
-  revision: 61dc7333e1a7a2a06378f8b61ab57582ca2af5c8
-  ref: 61dc733
-  specs:
-    autodoc (0.3.2)
-      actionpack
-      activesupport (>= 3.0.0)
-      rspec
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -108,6 +98,10 @@ GEM
       activerecord (>= 3.0)
     addressable (2.3.6)
     arel (5.0.1.20140414130214)
+    autodoc (0.4.0)
+      actionpack
+      activesupport (>= 3.0.0)
+      rspec
     awesome_print (1.2.0)
     bcrypt (3.1.7)
     builder (3.2.2)
@@ -364,7 +358,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   activerecord-import
-  autodoc!
+  autodoc
   awesome_print
   bcrypt (~> 3.1.7)
   better_errors!

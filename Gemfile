@@ -62,7 +62,7 @@ group :test do
   gem "capybara"
   gem "poltergeist"
   gem "timecop"
-  gem "autodoc", github: "shin1ohno/autodoc", ref: "61dc733"
+  gem "autodoc"
   gem "webmock"
   gem "vcr"
 end
