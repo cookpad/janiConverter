@@ -60,4 +60,33 @@ describe Movie, type: :model do
       end
     end
   end
+
+  describe "JSON serialization" do
+    subject do
+      JSON.parse(
+        MovieSerializer.new(movie).to_json
+      ).with_indifferent_access
+    end
+
+    before do
+      create(:strip, movie: movie)
+      create(:tracking_event, movie: movie)
+      create(:loading_banner, movie: movie)
+      create(:postroll_banner, movie: movie)
+    end
+
+    it "has movie attributes and ones of related objects" do
+      expect(subject[:uuid]).to eq movie.uuid
+      expect(subject[:frame_width]).to eq movie.frame_width
+      expect(subject[:frame_height]).to eq movie.frame_height
+      expect(subject[:fps]).to eq movie.fps
+      expect(subject[:source_url]).to eq movie.movie.url
+      expect(subject[:pixel_ratio]).to eq Movie::PIXEL_RATIO
+      expect(subject[:loading_banner][:image_url]).to eq movie.loading_banner.image.url
+      expect(subject[:postroll_banner][:image_url]).to eq movie.postroll_banner.image.url
+      expect(subject[:strips]).to have(1).items
+      expect(subject[:strips][0][:image_url]).to eq movie.strips.first.image.url
+      expect(subject[:tracking_events]).to have(1).items
+    end
+  end
 end

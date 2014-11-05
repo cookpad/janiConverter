@@ -9,6 +9,7 @@ gem "coffee-rails",     github: "rails/coffee-rails"
 gem "jquery-rails"
 gem "therubyracer", platforms: :ruby
 gem "bcrypt", "~> 3.1.7"
+gem "active_model_serializers"
 
 # database
 if ENV["DB"] == "sqlite"
@@ -61,7 +62,7 @@ group :test do
   gem "capybara"
   gem "poltergeist"
   gem "timecop"
-  gem "autodoc", github: "shin1ohno/autodoc", ref: "61dc733"
+  gem "autodoc"
   gem "webmock"
   gem "vcr"
 end

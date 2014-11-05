@@ -1,0 +1,2 @@
+class LoadingBannerSerializer < BannerSerializer
+end
