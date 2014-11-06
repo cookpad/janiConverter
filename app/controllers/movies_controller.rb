@@ -1,6 +1,8 @@
 class MoviesController < ApplicationController
   respond_to :json, :html
 
+  MOVIES_PER_PAGE = 9
+
   def new
     @movie = Movie.new
     @loading_banner = @movie.build_loading_banner
@@ -14,12 +16,16 @@ class MoviesController < ApplicationController
     create_tracking_events_if_params_available(@movie, params)
 
     Converter.perform_async(@movie.uuid)
-    redirect_to @movie
+    redirect_to movies_path
   end
 
   def show
     @movie = Movie.where(id: params[:id]).first()
     respond_with @movie
+  end
+
+  def index
+    @movies = Movie.valid.order(created_at: :desc).preload(:loading_banner).page(params[:page]).per(MOVIES_PER_PAGE)
   end
 
   private

@@ -10,6 +10,7 @@ gem "jquery-rails"
 gem "therubyracer", platforms: :ruby
 gem "bcrypt", "~> 3.1.7"
 gem "active_model_serializers"
+gem "kaminari"
 
 # database
 if ENV["DB"] == "sqlite"

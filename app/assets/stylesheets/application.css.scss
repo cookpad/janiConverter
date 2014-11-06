@@ -3,4 +3,10 @@
 @import "neat";
 @import "base/base";
 
-@import "movies/new"
+$base-body-color: white;
+
+@import "refills/cards";
+@import "refills/pagination";
+
+@import "movies/new";
+@import "movies/index"
