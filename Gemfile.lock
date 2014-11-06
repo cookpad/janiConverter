@@ -104,6 +104,13 @@ GEM
       rspec
     awesome_print (1.2.0)
     bcrypt (3.1.9)
+    bitters (0.10.1)
+      bourbon (>= 3.2)
+      sass (>= 3.2)
+      thor
+    bourbon (4.0.2)
+      sass (~> 3.3)
+      thor
     builder (3.2.2)
     byebug (3.5.1)
       columnize (~> 0.8)
@@ -234,6 +241,9 @@ GEM
     minitest (5.4.2)
     multi_json (1.10.1)
     mysql2 (0.3.16)
+    neat (1.7.0)
+      bourbon (>= 4.0)
+      sass (>= 3.3)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.1)
@@ -275,6 +285,7 @@ GEM
     redis-namespace (1.5.1)
       redis (~> 3.0, >= 3.0.4)
     ref (1.0.5)
+    refills (0.0.2)
     rmagick (2.13.3)
     rspec (3.1.0)
       rspec-core (~> 3.1.0)
@@ -363,6 +374,8 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   better_errors!
   binding_of_caller!
+  bitters
+  bourbon
   capybara
   carrierwave
   carrierwave_backgrounder
@@ -378,6 +391,7 @@ DEPENDENCIES
   jquery-rails
   launchy
   mysql2
+  neat
   poltergeist
   pry-byebug
   pry-doc
@@ -386,6 +400,7 @@ DEPENDENCIES
   quiet_assets
   rack-livereload
   rails!
+  refills
   rspec
   rspec-collection_matchers
   rspec-core

@@ -39,6 +39,12 @@ gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'slim'
 
+# style
+gem "bourbon"
+gem "neat"
+gem "bitters"
+gem "refills"
+
 group :development do
   gem "spring"
   gem "factory_girl_rails"
