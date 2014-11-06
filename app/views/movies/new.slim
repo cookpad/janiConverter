@@ -1,40 +1,40 @@
 h1 new movie
-
 = form_for @movie, html: { multipart: true } do |movie_form|
-
-  h2 movie file
-  = movie_form.file_field :movie
-  -# see https://github.com/carrierwaveuploader/carrierwave#making-uploads-work-across-form-redisplays
-  = movie_form.hidden_field :movie_cache
-
-  h2 movie attributes
-  = movie_form.text_field :frame_width, placeholder: :width
-  = movie_form.text_field :frame_height, placeholder: :height
-  = movie_form.text_field :fps, placeholder: :FPS
-
-  h2 callback urls
-  dl
-    = movie_form.fields_for :tracking_events do |tracking_events_field|
-      - TrackingEvent::Labels.constants.map { |const| TrackingEvent::Labels.const_get(const) }.each do |label|
-        = tracking_events_field.fields_for label do |tracking_event_field|
-          = tracking_event_field.hidden_field :label, value: label
-          dl= label.humanize(capitalize: false)
-          dd= tracking_event_field.text_field :url, placeholder: :url
-          dd
-            - TrackingEvent.request_types.each do |k, v|
-              = tracking_event_field.label :request_type, k, value: k
-              = tracking_event_field.radio_button(:request_type, k,
-                checked: k == TrackingEvent::DEFAULT_REQUEST_TYPE)
-
-  h2 loading banner
-  = movie_form.fields_for :loading_banner do |loading_banner_fields|
-    = loading_banner_fields.file_field :image
-
-  h2 postroll banner
-  = movie_form.fields_for :postroll_banner do |postroll_banner_fields|
-    = postroll_banner_fields.text_field :url, placeholder: :url
-    = postroll_banner_fields.file_field :image
-
-  hr
-
-  = movie_form.submit
+  .required
+    h2 required movie assets and attributes
+    fieldset.movie-file
+      legend movie file
+      = movie_form.file_field :movie
+      -# see https://github.com/carrierwaveuploader/carrierwave#making-uploads-work-across-form-redisplays
+      = movie_form.hidden_field :movie_cache
+    fieldset.movie-attributes
+      legend movie attributes
+      = movie_form.text_field :frame_width, placeholder: :width
+      = movie_form.text_field :frame_height, placeholder: :height
+      = movie_form.text_field :fps, placeholder: :FPS
+    fieldset.loading.banner
+      legend loading banner
+      = movie_form.fields_for :loading_banner do |loading_banner_fields|
+        = loading_banner_fields.file_field :image
+    fieldset.loading.banner
+      legend postroll banner
+      = movie_form.fields_for :postroll_banner do |postroll_banner_fields|
+        = postroll_banner_fields.file_field :image
+        = postroll_banner_fields.text_field :url, placeholder: :url
+  .optional
+    .callback-urls
+      h2 callback urls
+      = movie_form.fields_for :tracking_events do |tracking_events_field|
+        - TrackingEvent::Labels.constants.map { |const| TrackingEvent::Labels.const_get(const) }.each do |label|
+          fieldset
+            = tracking_events_field.fields_for label do |tracking_event_field|
+              = tracking_event_field.hidden_field :label, value: label
+              legend= label.humanize(capitalize: false)
+              = tracking_event_field.text_field :url, placeholder: :url
+              .request-type
+                - TrackingEvent.request_types.each do |k, v|
+                  = tracking_event_field.label :request_type, k, value: k
+                  = tracking_event_field.radio_button(:request_type, k,
+                    checked: k == TrackingEvent::DEFAULT_REQUEST_TYPE)
+  .submit
+    = movie_form.submit

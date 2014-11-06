@@ -1,0 +1,59 @@
+.movies-controller.new-action {
+  $mobile: new-breakpoint(max-width 500px 4);
+
+  @include outer-container;
+  .required {
+    @include span-columns(6);
+    @include media($mobile) {
+      @include fill-parent();
+    }
+  }
+  .optional {
+    @include span-columns(6);
+    @include omega();
+    @include media($mobile) {
+      @include fill-parent();
+    }
+  }
+  fieldset {
+    display: block;
+    width: auto;
+    height: $base-line-height * 7 * 1em;
+    &.movie-attributes {
+      @include reset-display;
+      input {
+        @include span-columns(4);
+      }
+    }
+  }
+  .submit {
+    @include span-columns(12);
+    @include omega();
+    border-top: $base-border;
+    padding-top: $base-spacing;
+    margin-top: $base-spacing;
+    text-align: right;
+  }
+  .callback-urls {
+    dt, dd {
+      display: block;
+      clear: both;
+    }
+    .request-type {
+      label, input {
+        display: inline-block;
+      }
+      label {
+        font-weight: normal;
+        margin: auto $base-spacing/2 auto $base-spacing;
+        &:after {
+          content: ":";
+        }
+      }
+    }
+  }
+  legend {
+    font-weight: bold;
+    font-size: $h4-font-size;
+  }
+}
