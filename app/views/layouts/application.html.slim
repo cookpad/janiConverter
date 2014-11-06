@@ -6,6 +6,19 @@ head
   meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"
   meta name="viewport" content="width=device-width, initial-scale=1.0"
 body class="#{controller_name}-controller #{action_name}-action"
+  header.navigation
+    .navigation-wrapper
+      a href=movies_path(banner: true) class="logo"
+        i.fa.fa-film
+      nav
+        ul.navigation-menu
+          li.nav-link.movies
+            a.fa.fa-files-o href=movies_path Movies
+          li.nav-link.new-movie
+            a.fa.fa-plus-circle href=new_movie_path Create a movie
+          li.nav-link.sidekiq
+            a.fa.fa-tachometer href="/sidekiq" sidekiq dashboards
   = yield
+  =stylesheet_link_tag "//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
   = stylesheet_link_tag "application.css"
   = javascript_include_tag "application.js"

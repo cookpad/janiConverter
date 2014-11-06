@@ -1,12 +1,43 @@
+$base-body-color: white;
+$navigation-height: 60px;
+
 @import "bourbon";
 @import "base/grid-settings";
 @import "neat";
 @import "base/base";
 
-$base-body-color: white;
-
 @import "refills/cards";
 @import "refills/pagination";
+@import "refills/navigation";
 
 @import "movies/new";
-@import "movies/index"
+@import "movies/index";
+
+header.navigation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  a.logo {
+    color: mix($light-gray, $blue);
+    font-size: $h1-font-size;
+  }
+
+  a.fa:before {
+    margin-right: $base-spacing/4;
+  }
+
+  .sidekiq {
+    float: right;
+  }
+}
+
+body {
+  padding-top: $navigation-height;
+}
+
+.movies-controller.new-action .nav-link.new-movie a,
+.movies-controller.index-action .nav-link.movies a {
+  color: $green;
+}
