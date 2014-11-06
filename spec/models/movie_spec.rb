@@ -1,7 +1,47 @@
 require 'rails_helper'
+require "sidekiq/testing"
 
 describe Movie, type: :model do
   let(:movie) { create(:movie) }
+
+  describe "conversion status" do
+    subject { movie }
+    context "by default" do
+      it "is to_be_converted" do
+        is_expected.to be_to_be_converted
+      end
+    end
+
+    context "after success converted" do
+      before do
+        allow_any_instance_of(Movie).to(
+          receive(:to_strips) { [create(:strip, movie: movie)] }
+        )
+      end
+
+      it "is converted" do
+        expect {
+          Converter.new.perform(subject.uuid)
+          subject.reload
+        }.to change(subject, :converted?).to(true)
+      end
+    end
+
+    context "after error(empty) converted" do
+      before do
+        allow_any_instance_of(Movie).to(
+          receive(:to_strips) { [] }
+        )
+      end
+
+      it "is converted" do
+        expect {
+          Converter.new.perform(subject.uuid)
+          subject.reload
+        }.to change(subject, :error?).to(true)
+      end
+    end
+  end
 
   describe "#to_strips" do
     subject { movie.to_strips.each(&:save)[0] }

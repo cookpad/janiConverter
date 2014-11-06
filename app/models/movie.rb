@@ -10,6 +10,12 @@ class Movie < ActiveRecord::Base
   validates_uniqueness_of :uuid
   accepts_nested_attributes_for :loading_banner, :postroll_banner
 
+  scope :valid, -> do
+    where.not(uuid: nil).where.not(frame_width: nil).where.not(frame_height: nil).where.not(fps: nil)
+  end
+
+  enum conversion_status: %i(to_be_converted converting converted error)
+
   mount_uploader :movie, MovieUploader
   process_in_background :movie
 
@@ -36,6 +42,10 @@ class Movie < ActiveRecord::Base
 
   def display_height
     frame_height/PIXEL_RATIO
+  end
+
+  def frames_count
+    strips.sum(:frames_count)
   end
 
   private
