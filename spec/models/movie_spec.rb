@@ -1,7 +1,47 @@
 require 'rails_helper'
+require "sidekiq/testing"
 
 describe Movie, type: :model do
   let(:movie) { create(:movie) }
+
+  describe "conversion status" do
+    subject { movie }
+    context "by default" do
+      it "is to_be_converted" do
+        is_expected.to be_to_be_converted
+      end
+    end
+
+    context "after success converted" do
+      before do
+        allow_any_instance_of(Movie).to(
+          receive(:to_strips) { [create(:strip, movie: movie)] }
+        )
+      end
+
+      it "is converted" do
+        expect {
+          Converter.new.perform(subject.uuid)
+          subject.reload
+        }.to change(subject, :converted?).to(true)
+      end
+    end
+
+    context "after error(empty) converted" do
+      before do
+        allow_any_instance_of(Movie).to(
+          receive(:to_strips) { [] }
+        )
+      end
+
+      it "is converted" do
+        expect {
+          Converter.new.perform(subject.uuid)
+          subject.reload
+        }.to change(subject, :error?).to(true)
+      end
+    end
+  end
 
   describe "#to_strips" do
     subject { movie.to_strips.each(&:save)[0] }
@@ -80,6 +120,7 @@ describe Movie, type: :model do
       expect(subject[:frame_width]).to eq movie.frame_width
       expect(subject[:frame_height]).to eq movie.frame_height
       expect(subject[:fps]).to eq movie.fps
+      expect(subject[:conversion_status]).to eq movie.conversion_status
       expect(subject[:source_url]).to eq movie.movie.url
       expect(subject[:pixel_ratio]).to eq Movie::PIXEL_RATIO
       expect(subject[:loading_banner][:image_url]).to eq movie.loading_banner.image.url

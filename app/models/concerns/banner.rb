@@ -1,5 +1,6 @@
 module Banner
   extend ActiveSupport::Concern
+  include MovieUUIDCacheable
 
   included do
     belongs_to :movie

@@ -1,5 +1,5 @@
 class MovieSerializer < ActiveModel::Serializer
-  attributes :uuid, :frame_width, :frame_height, :fps, :source_url, :pixel_ratio
+  attributes :uuid, :frame_width, :frame_height, :fps, :source_url, :pixel_ratio, :conversion_status
   has_one :loading_banner, :postroll_banner
   has_many :tracking_events, :strips
 

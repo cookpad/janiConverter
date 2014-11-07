@@ -1,4 +1,6 @@
 class Strip < ActiveRecord::Base
+  include MovieUUIDCacheable
+
   belongs_to :movie
   validates_presence_of :frames_count, :index, :movie, :image
 

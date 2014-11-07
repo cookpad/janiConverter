@@ -1,0 +1,33 @@
+.cards
+  - @movies.each do |movie|
+    - link = movie.converted? ? movie_path(movie) : nil
+    a.card href=link
+      .card-image
+        - if movie.loading_banner
+          img src=movie.loading_banner.image.url
+        - else
+          img src="http://placehold.it/320x150&text=no+loading+banner+available"
+      .card-header created on #{l(movie.created_at.to_date)}
+      .card-copy uuid: #{movie.uuid}
+      .card-stats
+        ul
+          li
+            =movie.frames_count
+            span frames
+          li
+            =movie.fps
+            span fps
+          li
+            =movie.frame_width
+            span width
+          li
+            =movie.frame_height
+            span height
+        - if movie.converting?
+          .ribbon-wrapper
+            .ribbon.processing converting
+        - elsif movie.error?
+          .ribbon-wrapper
+            .ribbon.error error
+
+=paginate @movies
