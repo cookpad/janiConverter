@@ -43,7 +43,7 @@ class MoviesController < ApplicationController
   end
 
   def create_tracking_events_if_params_available(movie, params)
-    tracking_events_params = params[Movie.class_name.underscore][TrackingEvent.class_name.pluralize.underscore]
+    tracking_events_params = params[Movie.name.underscore][TrackingEvent.name.pluralize.underscore]
     return unless tracking_events_params
     tracking_events_params.each do |event_name, parameters|
       return if parameters["url"].empty?

@@ -8,7 +8,7 @@ class ImagePublisher < CarrierWave::Uploader::Base
   end
 
   def store_dir
-    "#{Rails.env}/strips/#{model.cached_movie_uuid}"
+    "#{Rails.env}/#{Strip.name.underscore.pluralize}/#{model.cached_movie_uuid}"
   end
 
   module CDNURLFix
