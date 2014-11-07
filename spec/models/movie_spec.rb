@@ -120,6 +120,7 @@ describe Movie, type: :model do
       expect(subject[:frame_width]).to eq movie.frame_width
       expect(subject[:frame_height]).to eq movie.frame_height
       expect(subject[:fps]).to eq movie.fps
+      expect(subject[:conversion_status]).to eq movie.conversion_status
       expect(subject[:source_url]).to eq movie.movie.url
       expect(subject[:pixel_ratio]).to eq Movie::PIXEL_RATIO
       expect(subject[:loading_banner][:image_url]).to eq movie.loading_banner.image.url
