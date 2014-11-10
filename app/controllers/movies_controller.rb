@@ -47,8 +47,9 @@ class MoviesController < ApplicationController
       :frame_width,
       :movie,
       :movie_cache,
-      postroll_banner_attributes: [:url, :image],
-      loading_banner_attributes: [:image]
+      :remote_movie_url,
+      postroll_banner_attributes: [:url, :image, :remote_image_url],
+      loading_banner_attributes: [:image, :remote_image_url]
     )
   end
 
