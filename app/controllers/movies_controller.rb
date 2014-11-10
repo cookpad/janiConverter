@@ -20,7 +20,12 @@ class MoviesController < ApplicationController
   end
 
   def show
-    @movie = Movie.where(id: params[:id]).first()
+    @movie = if params[:uuid]
+      Movie.where(uuid: params[:uuid]).first()
+    else
+      Movie.where(id: params[:id]).first()
+    end
+
     respond_with @movie
   end
 
