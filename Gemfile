@@ -46,6 +46,9 @@ gem "neat"
 gem "bitters"
 gem "refills"
 
+# http
+gem "faraday"
+
 group :development do
   gem "spring"
   gem "factory_girl_rails"

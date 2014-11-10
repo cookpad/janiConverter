@@ -11,3 +11,4 @@ production:
   - default
   - [transcoder, 1]
   - [movie_upload, 1]
+  - [pinger, 1]

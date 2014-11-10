@@ -15,7 +15,7 @@ class MoviesController < ApplicationController
     @movie.save!
     create_tracking_events_if_params_available(@movie, params)
 
-    Converter.perform_async(@movie.uuid)
+    Converter.perform_async(@movie.uuid, params[:callback_url])
 
     respond_to do |format|
       format.json { respond_with @movie }
