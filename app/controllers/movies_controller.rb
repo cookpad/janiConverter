@@ -16,7 +16,11 @@ class MoviesController < ApplicationController
     create_tracking_events_if_params_available(@movie, params)
 
     Converter.perform_async(@movie.uuid)
-    redirect_to movies_path
+
+    respond_to do |format|
+      format.json { respond_with @movie }
+      format.html { redirect_to movies_path }
+    end
   end
 
   def show
@@ -26,6 +30,7 @@ class MoviesController < ApplicationController
       Movie.where(id: params[:id]).first()
     end
 
+    return head :not_found unless @movie
     respond_with @movie
   end
 
