@@ -4,7 +4,7 @@ class MoviesController < ApplicationController
   MOVIES_PER_PAGE = 9
 
   def new
-    @movie = Movie.new
+    @movie = Movie.new.tap{ |m| m.pixel_ratio = nil }
     @loading_banner = @movie.build_loading_banner
     @postroll_banner = @movie.build_postroll_banner
   end
@@ -15,12 +15,22 @@ class MoviesController < ApplicationController
     @movie.save!
     create_tracking_events_if_params_available(@movie, params)
 
-    Converter.perform_async(@movie.uuid)
-    redirect_to movies_path
+    Converter.perform_async(@movie.uuid, params[:callback_url])
+
+    respond_to do |format|
+      format.json { respond_with @movie }
+      format.html { redirect_to movies_path }
+    end
   end
 
   def show
-    @movie = Movie.where(id: params[:id]).first()
+    @movie = if params[:uuid]
+      Movie.where(uuid: params[:uuid]).first()
+    else
+      Movie.where(id: params[:id]).first()
+    end
+
+    return head :not_found unless @movie
     respond_with @movie
   end
 
@@ -37,8 +47,10 @@ class MoviesController < ApplicationController
       :frame_width,
       :movie,
       :movie_cache,
-      postroll_banner_attributes: [:url, :image],
-      loading_banner_attributes: [:image]
+      :remote_movie_url,
+      :pixel_ratio,
+      postroll_banner_attributes: [:url, :image, :remote_image_url],
+      loading_banner_attributes: [:image, :remote_image_url]
     )
   end
 

@@ -122,7 +122,7 @@ describe Movie, type: :model do
       expect(subject[:fps]).to eq movie.fps
       expect(subject[:conversion_status]).to eq movie.conversion_status
       expect(subject[:source_url]).to eq movie.movie.url
-      expect(subject[:pixel_ratio]).to eq Movie::PIXEL_RATIO
+      expect(subject[:pixel_ratio]).to eq movie.pixel_ratio
       expect(subject[:loading_banner][:image_url]).to eq movie.loading_banner.image.url
       expect(subject[:postroll_banner][:image_url]).to eq movie.postroll_banner.image.url
       expect(subject[:strips]).to have(1).items

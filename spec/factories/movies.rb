@@ -6,5 +6,6 @@ FactoryGirl.define do
     frame_height { frame_width / 16 * 9 }
     fps { rand(10) + 10 }
     movie { fixture_file_upload(Rails.root.join("spec", "fixtures", "movies", "kuro.mov")) }
+    pixel_ratio { [1, 2].sample }
   end
 end
