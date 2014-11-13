@@ -2,10 +2,10 @@ require "jani/strip_maker/movie"
 require "jani/strip_maker/transcode_options"
 
 class Movie < ActiveRecord::Base
-  has_many :strips
-  has_many :tracking_events
-  has_one :loading_banner
-  has_one :postroll_banner
+  has_many :strips, dependent: :destroy
+  has_many :tracking_events, dependent: :destroy
+  has_one :loading_banner, dependent: :destroy
+  has_one :postroll_banner, dependent: :destroy
   validates_presence_of :uuid, :frame_width, :frame_height, :fps, :pixel_ratio
   validates_uniqueness_of :uuid
   accepts_nested_attributes_for :loading_banner, :postroll_banner
