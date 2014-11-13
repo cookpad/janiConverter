@@ -4,7 +4,7 @@ class MoviesController < ApplicationController
   MOVIES_PER_PAGE = 9
 
   def new
-    @movie = Movie.new
+    @movie = Movie.new.tap{ |m| m.pixel_ratio = nil }
     @loading_banner = @movie.build_loading_banner
     @postroll_banner = @movie.build_postroll_banner
   end
@@ -48,6 +48,7 @@ class MoviesController < ApplicationController
       :movie,
       :movie_cache,
       :remote_movie_url,
+      :pixel_ratio,
       postroll_banner_attributes: [:url, :image, :remote_image_url],
       loading_banner_attributes: [:image, :remote_image_url]
     )

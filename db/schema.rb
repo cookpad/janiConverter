@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141106092236) do
+ActiveRecord::Schema.define(version: 20141113084358) do
 
   create_table "loading_banners", force: true do |t|
     t.string   "image"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20141106092236) do
     t.boolean  "movie_processing",            default: false, null: false
     t.string   "movie_tmp"
     t.integer  "conversion_status", limit: 1, default: 0,     null: false
+    t.integer  "pixel_ratio",                 default: 1,     null: false
   end
 
   add_index "movies", ["conversion_status"], name: "index_movies_on_conversion_status", using: :btree
