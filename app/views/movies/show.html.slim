@@ -1,9 +1,11 @@
 h2 uuid
 p= @movie.uuid
 h2 preview
-=render partial: "movie", locals: { movie: @movie }
-=render partial: "player_assets"
+= h(@movie.to_preview_html)
+- if @movie.preview.try(:html)
+  h3 public preview link(lives for 1 week)
+  = @movie.preview.html.url(cdn: false, url_expiration: 1.week)
 h2 HTML code
 p= raw(CGI::escapeHTML(@movie.to_html))
 h3 JavaScript code
-p= raw(CGI::escapeHTML(render partial: "player_assets"))
+p= raw(CGI::escapeHTML(@movie.to_player_assets))

@@ -12,13 +12,23 @@ class ImagePublisher < CarrierWave::Uploader::Base
   end
 
   module CDNURLFix
-    def url
-      if asset_host && fog_credentials.present? && fog_credentials[:path_style]
+    def url(cdn: cdn = true, url_expiration: url_expiration = 24.hours)
+      if cdn_path?(cdn)
         fog_directory.match(/\/(.*)/)
         [asset_host, $1, path].join("/")
       else
+        self.fog_authenticated_url_expiration = url_expiration
         super
       end
+    end
+
+    private
+
+    def cdn_path?(cdn)
+      cdn &&
+        asset_host &&
+        fog_credentials.present? &&
+        fog_credentials[:path_style]
     end
   end
   include CDNURLFix
