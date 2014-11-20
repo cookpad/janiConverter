@@ -1,3 +1,5 @@
+require "addressable/uri"
+
 class HookPinger
   include Sidekiq::Worker
   sidekiq_options queue: :pinger, retry: 10, backtrace: true
