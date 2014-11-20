@@ -12,6 +12,7 @@ class Converter
       movie.error!
     else
       movie.converted!
+      Preview.new_from_movie(movie).save!
       HookPinger.perform_async(callback_url, uuid) if callback_url
     end
   end

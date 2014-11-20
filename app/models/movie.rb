@@ -6,6 +6,7 @@ class Movie < ActiveRecord::Base
   has_many :tracking_events, dependent: :destroy
   has_one :loading_banner, dependent: :destroy
   has_one :postroll_banner, dependent: :destroy
+  has_one :preview, dependent: :destroy
   validates_presence_of :uuid, :frame_width, :frame_height, :fps, :pixel_ratio
   validates_uniqueness_of :uuid
   accepts_nested_attributes_for :loading_banner, :postroll_banner
@@ -32,6 +33,18 @@ class Movie < ActiveRecord::Base
 
   def to_html
     view_context.render("movies/movie", movie: self)
+  end
+
+  def to_player_assets
+    view_context.render("movies/player_assets")
+  end
+
+  def to_preview_html(layout: layout = nil)
+    view_context.assign(movie: self)
+    view_context.render(
+      template: "movies/preview",
+      layout: layout,
+    )
   end
 
   def display_width
@@ -64,7 +77,7 @@ class Movie < ActiveRecord::Base
   end
 
   def view_context
-    lookup_context = ActionView::LookupContext.new('app/views')
+    lookup_context = ActionView::LookupContext.new("#{::Rails.root}/app/views")
     @_context ||= ActionView::Base.new(lookup_context)
   end
 end
