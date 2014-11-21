@@ -11,6 +11,7 @@ gem "therubyracer", platforms: :ruby
 gem "bcrypt", "~> 3.1.7"
 gem "active_model_serializers"
 gem "kaminari"
+gem "addressable"
 
 # database
 if ENV["DB"] == "sqlite"

@@ -375,6 +375,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   activerecord-import
+  addressable
   autodoc
   awesome_print
   bcrypt (~> 3.1.7)
