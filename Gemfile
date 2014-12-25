@@ -1,8 +1,8 @@
 source "https://rubygems.org"
 
 # rails things(mostly by rails new)
-gem "rails",            github: "rails/rails", branch: "4-1-stable"
-gem "sprockets-rails",  github: "rails/sprockets-rails", branch: "2-1-stable"
+gem "rails",            github: "rails/rails", branch: "4-2-stable"
+gem "sprockets-rails", require: "sprockets/railtie"
 gem "sass-rails",       github: "rails/sass-rails"
 gem "uglifier", ">= 1.3.0"
 gem "coffee-rails",     github: "rails/coffee-rails"
@@ -12,6 +12,9 @@ gem "bcrypt", "~> 3.1.7"
 gem "active_model_serializers"
 gem "kaminari"
 gem "addressable"
+
+# for deprecation of respond_to/respond_with in Rails 4.2
+gem "responders", "~> 2.0"
 
 # database
 if ENV["DB"] == "sqlite"
