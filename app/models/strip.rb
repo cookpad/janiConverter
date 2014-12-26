@@ -7,7 +7,9 @@ class Strip < ActiveRecord::Base
   mount_uploader :image, ImagePublisher
   process_in_background :image
 
-  def self.new_from_strip_maker_strip(strip_maker_strip: strip_maker_strip, movie: movie)
+  def self.new_from_strip_maker_strip(strip_maker_strip: nil, movie: nil)
+    raise "strip and movie required" if strip_maker_strip.nil? || movie.nil?
+
     Strip.new(strip_maker_strip.to_metadata).tap do |new_strip|
       new_strip.movie = movie
       Dir.mktmpdir("#{movie.uuid}-strip-#{new_strip.index}") do |tmpdir|

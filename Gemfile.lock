@@ -259,7 +259,7 @@ GEM
     i18n (0.7.0)
     inflecto (0.0.2)
     ipaddress (0.8.0)
-    jani-strip_maker (1.0.3)
+    jani-strip_maker (1.0.4)
       rmagick (= 2.13.3)
       thor (= 0.19.1)
     jquery-rails (4.0.2)
