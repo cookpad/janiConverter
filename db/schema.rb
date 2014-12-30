@@ -13,70 +13,70 @@
 
 ActiveRecord::Schema.define(version: 20141119083935) do
 
-  create_table "loading_banners", force: true do |t|
-    t.string   "image"
-    t.integer  "movie_id"
+  create_table "loading_banners", force: :cascade do |t|
+    t.string   "image",      limit: 255
+    t.integer  "movie_id",   limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "loading_banners", ["movie_id"], name: "index_loading_banners_on_movie_id", unique: true, using: :btree
 
-  create_table "movies", force: true do |t|
-    t.string   "uuid"
-    t.integer  "frame_width"
-    t.integer  "frame_height"
-    t.integer  "fps"
+  create_table "movies", force: :cascade do |t|
+    t.string   "uuid",              limit: 255
+    t.integer  "frame_width",       limit: 4
+    t.integer  "frame_height",      limit: 4
+    t.integer  "fps",               limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "movie"
-    t.boolean  "movie_processing",            default: false, null: false
-    t.string   "movie_tmp"
-    t.integer  "conversion_status", limit: 1, default: 0,     null: false
-    t.integer  "pixel_ratio",                 default: 1,     null: false
+    t.string   "movie",             limit: 255
+    t.boolean  "movie_processing",  limit: 1,   default: false, null: false
+    t.string   "movie_tmp",         limit: 255
+    t.integer  "conversion_status", limit: 1,   default: 0,     null: false
+    t.integer  "pixel_ratio",       limit: 4,   default: 1,     null: false
   end
 
   add_index "movies", ["conversion_status"], name: "index_movies_on_conversion_status", using: :btree
   add_index "movies", ["uuid"], name: "index_movies_on_uuid", unique: true, using: :btree
 
-  create_table "postroll_banners", force: true do |t|
-    t.text     "url"
-    t.string   "image"
-    t.integer  "movie_id"
+  create_table "postroll_banners", force: :cascade do |t|
+    t.text     "url",        limit: 65535
+    t.string   "image",      limit: 255
+    t.integer  "movie_id",   limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "postroll_banners", ["movie_id"], name: "index_postroll_banners_on_movie_id", unique: true, using: :btree
 
-  create_table "previews", force: true do |t|
-    t.integer  "movie_id"
-    t.string   "html"
+  create_table "previews", force: :cascade do |t|
+    t.integer  "movie_id",   limit: 4
+    t.string   "html",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "previews", ["movie_id"], name: "index_previews_on_movie_id", unique: true, using: :btree
 
-  create_table "strips", force: true do |t|
-    t.integer  "movie_id"
-    t.integer  "frames_count"
-    t.integer  "index"
-    t.string   "image"
+  create_table "strips", force: :cascade do |t|
+    t.integer  "movie_id",     limit: 4
+    t.integer  "frames_count", limit: 4
+    t.integer  "index",        limit: 4
+    t.string   "image",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "strips", ["movie_id", "index"], name: "index_strips_on_movie_id_and_index", using: :btree
 
-  create_table "tracking_events", force: true do |t|
-    t.string   "label"
-    t.text     "url"
-    t.integer  "track_on"
-    t.integer  "movie_id"
+  create_table "tracking_events", force: :cascade do |t|
+    t.string   "label",        limit: 255
+    t.text     "url",          limit: 65535
+    t.integer  "track_on",     limit: 4
+    t.integer  "movie_id",     limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "request_type", limit: 1, default: 0, null: false
+    t.integer  "request_type", limit: 1,     default: 0, null: false
   end
 
   add_index "tracking_events", ["movie_id", "label"], name: "index_tracking_events_on_movie_id_and_label", unique: true, using: :btree
