@@ -95,10 +95,17 @@ describe MoviesController, type: :controller do
     subject { get :show, id: movie.id, format: :json }
 
     let(:movie)  { create(:movie) }
+    let(:strips_count) { rand(10) + 1 }
+    let(:response_movie) { JSON.parse(response.body).with_indifferent_access }
+
+    before { strips_count.times { create(:strip, movie: movie) } }
 
     it "shows the movie" do
       subject
       expect(assigns(:movie).uuid).to eq(movie.uuid)
+      expect(response_movie[:uuid]).to eq(movie.uuid)
+      expect(assigns(:movie).strips).to have(strips_count).items
+      expect(response_movie[:strips]).to have(strips_count).items
     end
   end
 end
