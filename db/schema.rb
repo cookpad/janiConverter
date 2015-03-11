@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20141119083935) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "movie",             limit: 255
-    t.boolean  "movie_processing",  limit: 1,   default: false, null: false
+    t.boolean  "movie_processing",              default: false, null: false
     t.string   "movie_tmp",         limit: 255
     t.integer  "conversion_status", limit: 1,   default: 0,     null: false
     t.integer  "pixel_ratio",       limit: 4,   default: 1,     null: false
