@@ -15,13 +15,14 @@ describe MoviesController, type: :controller do
       expect{ subject }.to change{ Movie.count(1) }.by(1)
     end
 
-    it "sets attributes: uuid, fps, frame_height, frame_width" do
+    it "sets attributes: uuid, fps, frame_height, frame_width, pixel_ratio, vast_url" do
       subject
       expect(assigns(:movie).uuid).not_to eq(new_movie.uuid)
       expect(assigns(:movie).fps).to eq(new_movie.fps)
       expect(assigns(:movie).frame_height).to eq(new_movie.frame_height)
       expect(assigns(:movie).frame_width).to eq(new_movie.frame_width)
       expect(assigns(:movie).pixel_ratio).to eq(new_movie.pixel_ratio)
+      expect(assigns(:movie).vast_url).to eq(new_movie.vast_url)
     end
 
     it "sets MovieUploader instance to Movie model instance" do

@@ -16,6 +16,9 @@
           img src=movie.postroll_banner.image.url
       - else
         movie.postroll_banner
-  .tracking_events style="width: 0;height: 0;display: none;"
-    - movie.tracking_events.each do |tracking_event|
-      .tracking data-event=tracking_event.label data-url=tracking_event.url data-track-on=tracking_event.track_on data-type=tracking_event.request_type
+  - if movie.vast_url_available?
+    .tracking_events style="width: 0;height: 0;display: none;" data-vast-url=movie.vast_url
+  - else
+    .tracking_events style="width: 0;height: 0;display: none;"
+      - movie.tracking_events.each do |tracking_event|
+        .tracking data-event=tracking_event.label data-url=tracking_event.url data-track-on=tracking_event.track_on data-type=tracking_event.request_type

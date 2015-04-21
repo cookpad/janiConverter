@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141119083935) do
+ActiveRecord::Schema.define(version: 20150421020948) do
 
   create_table "loading_banners", force: :cascade do |t|
     t.string   "image",      limit: 255
@@ -30,10 +30,11 @@ ActiveRecord::Schema.define(version: 20141119083935) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "movie",             limit: 255
-    t.boolean  "movie_processing",              default: false, null: false
+    t.boolean  "movie_processing",                default: false, null: false
     t.string   "movie_tmp",         limit: 255
-    t.integer  "conversion_status", limit: 1,   default: 0,     null: false
-    t.integer  "pixel_ratio",       limit: 4,   default: 1,     null: false
+    t.integer  "conversion_status", limit: 1,     default: 0,     null: false
+    t.integer  "pixel_ratio",       limit: 4,     default: 1,     null: false
+    t.text     "vast_url",          limit: 65535
   end
 
   add_index "movies", ["conversion_status"], name: "index_movies_on_conversion_status", using: :btree
