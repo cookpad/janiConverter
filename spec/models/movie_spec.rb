@@ -74,6 +74,7 @@ describe Movie, type: :model do
     subject(:rendered) { Capybara.string(movie.to_html) }
     let(:movie_element) { rendered.find(".movie") }
     let(:strip_elements) { rendered.all(".strip") }
+    let(:tracking_events_element) { rendered.find(".tracking_events", visible: false) }
 
     it "renders dom for janiplayer" do
       expect(rendered.all(".stages_container")).to have(1).item
@@ -83,6 +84,7 @@ describe Movie, type: :model do
       expect(movie_element["data-fps"]).to eq movie.fps.to_s
       expect(movie_element["data-frame-height"]).to eq movie.display_height.to_s
       expect(movie_element["data-frame-width"]).to eq movie.display_width.to_s
+      expect(tracking_events_element["data-vast-url"]).to eq movie.vast_url
     end
 
     context "when no strips given" do
@@ -128,6 +130,7 @@ describe Movie, type: :model do
       expect(subject[:strips]).to have(1).items
       expect(subject[:strips][0][:image_url]).to eq movie.strips.first.image.url
       expect(subject[:tracking_events]).to have(1).items
+      expect(subject[:vast_url]).to eq movie.vast_url
     end
   end
 end

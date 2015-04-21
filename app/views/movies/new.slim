@@ -24,6 +24,9 @@
   .optional
     .callback-urls
       h2 callback urls
+      fieldset
+        legend VAST file url
+        = movie_form.text_field :vast_url, placeholder: :url
       = movie_form.fields_for :tracking_events do |tracking_events_field|
         - TrackingEvent::Labels.constants.map { |const| TrackingEvent::Labels.const_get(const) }.each do |label|
           fieldset

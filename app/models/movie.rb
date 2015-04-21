@@ -59,6 +59,10 @@ class Movie < ActiveRecord::Base
     strips.sum(:frames_count)
   end
 
+  def vast_url_available?
+    vast_url.present?
+  end
+
   private
 
   def to_strip_maker_movie
